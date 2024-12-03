@@ -90,7 +90,7 @@ public class NekoCustomInfoController extends JeecgController<NekoCustomInfo, IN
 	 */
 	@AutoLog(value = "顾客信息-添加")
 	@ApiOperation(value="顾客信息-添加", notes="顾客信息-添加")
-	@RequiresPermissions("nekoCustomInfo:neko_custom_info:add")
+	//@RequiresPermissions("nekoCustomInfo:neko_custom_info:add")
 	@PostMapping(value = "/add")
 	public Result<String> add(@RequestBody NekoCustomInfo nekoCustomInfo) {
 		nekoCustomInfoService.save(nekoCustomInfo);
@@ -105,7 +105,7 @@ public class NekoCustomInfoController extends JeecgController<NekoCustomInfo, IN
 	 */
 	@AutoLog(value = "顾客信息-编辑")
 	@ApiOperation(value="顾客信息-编辑", notes="顾客信息-编辑")
-	@RequiresPermissions("nekoCustomInfo:neko_custom_info:edit")
+	//@RequiresPermissions("nekoCustomInfo:neko_custom_info:edit")
 	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
 	public Result<String> edit(@RequestBody NekoCustomInfo nekoCustomInfo) {
 		nekoCustomInfoService.updateById(nekoCustomInfo);
@@ -120,7 +120,7 @@ public class NekoCustomInfoController extends JeecgController<NekoCustomInfo, IN
 	 */
 	@AutoLog(value = "顾客信息-通过id删除")
 	@ApiOperation(value="顾客信息-通过id删除", notes="顾客信息-通过id删除")
-	@RequiresPermissions("nekoCustomInfo:neko_custom_info:delete")
+	//@RequiresPermissions("nekoCustomInfo:neko_custom_info:delete")
 	@DeleteMapping(value = "/delete")
 	public Result<String> delete(@RequestParam(name="id",required=true) String id) {
 		nekoCustomInfoService.removeById(id);
@@ -135,7 +135,7 @@ public class NekoCustomInfoController extends JeecgController<NekoCustomInfo, IN
 	 */
 	@AutoLog(value = "顾客信息-批量删除")
 	@ApiOperation(value="顾客信息-批量删除", notes="顾客信息-批量删除")
-	@RequiresPermissions("nekoCustomInfo:neko_custom_info:deleteBatch")
+	//@RequiresPermissions("nekoCustomInfo:neko_custom_info:deleteBatch")
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<String> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		this.nekoCustomInfoService.removeByIds(Arrays.asList(ids.split(",")));

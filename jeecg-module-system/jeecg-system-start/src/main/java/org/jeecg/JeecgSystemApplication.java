@@ -21,7 +21,7 @@ import java.net.UnknownHostException;
 @Slf4j
 @SpringBootApplication
 //@EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
-@ComponentScan(basePackages={"org.jeecg","com.neko.modules","org.jeecg.modules.jmreport"})
+@ComponentScan(basePackages={"org.jeecg","com.neko","org.jeecg.modules.jmreport"})
 public class JeecgSystemApplication extends SpringBootServletInitializer {
 
     @Override
