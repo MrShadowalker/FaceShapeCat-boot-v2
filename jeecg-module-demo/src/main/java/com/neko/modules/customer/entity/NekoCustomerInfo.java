@@ -1,4 +1,4 @@
-package com.neko.modules.nekoCustomInfo.entity;
+package com.neko.modules.customer.entity;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -21,17 +21,17 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * @Description: 顾客信息
+ * @Description: 顾客相关信息
  * @Author: jeecg-boot
- * @Date:   2024-12-01
+ * @Date:   2024-12-13
  * @Version: V1.0
  */
 @Data
-@TableName("neko_custom_info")
+@TableName("neko_customer_info")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="neko_custom_info对象", description="顾客信息")
-public class NekoCustomInfo implements Serializable {
+@ApiModel(value="neko_customer_info对象", description="顾客相关信息")
+public class NekoCustomerInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
 	/**主键*/
@@ -85,11 +85,11 @@ public class NekoCustomInfo implements Serializable {
 	/**性别*/
 	@Excel(name = "性别", width = 15)
     @ApiModelProperty(value = "性别")
-    private java.lang.String gender;
+    private java.lang.Integer gender;
 	/**生日*/
-	@Excel(name = "生日", width = 20, format = "yyyy-MM-dd HH:mm:ss")
-	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@Excel(name = "生日", width = 15, format = "yyyy-MM-dd")
+	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "生日")
     private java.util.Date birthday;
 	/**头像*/
