@@ -2,6 +2,7 @@ package org.jeecg;
 
 import lombok.extern.slf4j.Slf4j;
 import org.jeecg.common.util.oConvertUtils;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -22,6 +23,7 @@ import java.net.UnknownHostException;
 @SpringBootApplication
 //@EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
 @ComponentScan(basePackages={"org.jeecg","com.neko","org.jeecg.modules.jmreport"})
+//@MapperScan("com.neko.modules")
 public class JeecgSystemApplication extends SpringBootServletInitializer {
 
     @Override

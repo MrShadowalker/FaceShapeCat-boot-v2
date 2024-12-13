@@ -11,4 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface INekoCustomerInfoService extends IService<NekoCustomerInfo> {
 
+    String queryCustomerIdByName(String name);
+
+    Integer queryMemberCardCount(String customerId);
 }
