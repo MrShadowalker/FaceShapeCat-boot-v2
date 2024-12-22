@@ -1,5 +1,6 @@
 package com.neko.modules.customer.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.neko.modules.customer.entity.NekoCustomerCourseInfo;
 import com.neko.modules.customer.mapper.NekoCustomerCourseInfoMapper;
 import com.neko.modules.customer.service.INekoCustomerCourseInfoService;
@@ -16,4 +17,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 @Service
 public class NekoCustomerCourseInfoServiceImpl extends ServiceImpl<NekoCustomerCourseInfoMapper, NekoCustomerCourseInfo> implements INekoCustomerCourseInfoService {
 
+    @Override
+    public int countCustomerCourseByCustomerId(String customerId) {
+        QueryWrapper<NekoCustomerCourseInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("customer_id",customerId);
+        return Math.toIntExact(this.count(queryWrapper));
+    }
 }

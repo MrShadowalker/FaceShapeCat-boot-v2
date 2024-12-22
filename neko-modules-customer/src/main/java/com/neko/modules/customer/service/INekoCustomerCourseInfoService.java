@@ -11,4 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface INekoCustomerCourseInfoService extends IService<NekoCustomerCourseInfo> {
 
+    int countCustomerCourseByCustomerId(String customerId);
+
 }

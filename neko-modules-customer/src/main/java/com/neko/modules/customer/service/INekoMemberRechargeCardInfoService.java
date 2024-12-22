@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface INekoMemberRechargeCardInfoService extends IService<NekoMemberRechargeCardInfo> {
 
-    Integer queryMemberCardCountByCustomerId(String customerId);
+    Integer countMemberCardByCustomerId(String customerId);
 
 }

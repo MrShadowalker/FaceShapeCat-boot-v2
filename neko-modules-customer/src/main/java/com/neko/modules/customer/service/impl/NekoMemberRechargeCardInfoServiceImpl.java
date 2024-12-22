@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 public class NekoMemberRechargeCardInfoServiceImpl extends ServiceImpl<NekoMemberRechargeCardInfoMapper, NekoMemberRechargeCardInfo> implements INekoMemberRechargeCardInfoService {
 
     @Override
-    public Integer queryMemberCardCountByCustomerId(String customerId) {
+    public Integer countMemberCardByCustomerId(String customerId) {
         QueryWrapper<NekoMemberRechargeCardInfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("customer_id",customerId);
         return Math.toIntExact(this.count(queryWrapper));
