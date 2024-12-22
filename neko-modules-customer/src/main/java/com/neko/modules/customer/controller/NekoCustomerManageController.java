@@ -20,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.system.query.QueryRuleEnum;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,7 +85,8 @@ public class NekoCustomerManageController {
         IPage<NekoCustomerInfo> pageList = nekoCustomerInfoService.page(page, queryWrapper);
         IPage<CustomerListPageVO> customerList = pageList.convert(customerInfo -> {
             CustomerListPageVO customerListPageVO = new CustomerListPageVO();
-            customerListPageVO.setCustomerInfo(customerInfo);
+            // 深拷贝
+            BeanUtils.copyProperties(customerInfo, customerListPageVO);
             customerListPageVO.setMemberRechargeCardCount(nekoMemberRechargeCardInfoService.countMemberCardByCustomerId(customerInfo.getId()));
             customerListPageVO.setCustomerCourseCount(nekoCustomerCourseInfoService.countCustomerCourseByCustomerId(customerInfo.getId()));
             return customerListPageVO;

@@ -7,8 +7,7 @@ import lombok.Data;
  * @author Shadowalker
  */
 @Data
-public class CustomerListPageVO {
-    private NekoCustomerInfo customerInfo;
+public class CustomerListPageVO extends NekoCustomerInfo {
     private int memberRechargeCardCount;
     private int customerCourseCount;
 }
