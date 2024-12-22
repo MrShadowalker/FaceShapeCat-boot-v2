@@ -142,4 +142,16 @@ public class NekoMemberRechargeCardInfo implements Serializable {
 	@Excel(name = "疗程折扣，单位：万分比", width = 15)
     @ApiModelProperty(value = "疗程折扣，单位：万分比")
     private java.math.BigDecimal courseDiscountRate;
+    /**开卡门店ID*/
+    @Excel(name = "开卡门店ID", width = 15)
+    @ApiModelProperty(value = "开卡门店ID")
+    private java.lang.String shopId;
+    /**开卡员工ID*/
+    @Excel(name = "开卡员工ID", width = 15)
+    @ApiModelProperty(value = "开卡员工ID")
+    private java.lang.String employeeId;
+    /**推荐人ID*/
+    @Excel(name = "推荐人ID", width = 15)
+    @ApiModelProperty(value = "推荐人ID")
+    private java.lang.String recommenderId;
 }
