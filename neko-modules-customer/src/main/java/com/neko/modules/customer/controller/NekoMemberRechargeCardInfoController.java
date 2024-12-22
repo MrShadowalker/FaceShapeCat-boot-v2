@@ -78,15 +78,18 @@ public class NekoMemberRechargeCardInfoController extends JeecgController<NekoMe
 	/**
 	 *   添加
 	 *
-	 * @param nekoMemberRechargeCardInfo
+	 * @param req
 	 * @return
 	 */
 	@AutoLog(value = "会员充值卡信息表-添加")
 	@ApiOperation(value="会员充值卡信息表-添加", notes="会员充值卡信息表-添加")
 	@RequiresPermissions("customer:neko_member_recharge_card_info:add")
 	@PostMapping(value = "/add")
-	public Result<String> add(@RequestBody NekoMemberRechargeCardInfo nekoMemberRechargeCardInfo) {
-		nekoMemberRechargeCardInfoService.save(nekoMemberRechargeCardInfo);
+	public Result<String> add(@RequestBody NekoMemberRechargeCardInfo req) {
+		// 自动生成卡号
+		String cardNum = String.valueOf(System.currentTimeMillis());
+		req.setCardNum(cardNum);
+		nekoMemberRechargeCardInfoService.save(req);
 		return Result.OK("添加成功！");
 	}
 	

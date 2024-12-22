@@ -108,4 +108,14 @@ public class NekoCustomerManageController {
         return Result.OK(customerDetail);
     }
 
+    @ApiOperation(value="新增会员卡", notes="新增会员卡")
+    @GetMapping(value = "/addMemberCard")
+    public Result<String> addMemberCard(@RequestParam(name="customerId",required=true) String customerId) {
+        NekoMemberRechargeCardInfo nekoMemberRechargeCardInfo = new NekoMemberRechargeCardInfo();
+        nekoMemberRechargeCardInfo.setCustomerId(customerId);
+        nekoMemberRechargeCardInfo.setCardType("1");
+        nekoMemberRechargeCardInfo.setCardName("VIP会员卡");
+        nekoMemberRechargeCardInfo.setCardNum("VIP-" + System.currentTimeMillis());
+    }
+
 }
