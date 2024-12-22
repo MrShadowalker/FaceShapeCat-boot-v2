@@ -130,7 +130,7 @@ public class NekoCustomerManageController {
         // 构造会员充值卡信息
         NekoMemberRechargeCardInfo memberRechargeCardInfo = buildMemberRechargeCardInfo(memberInfo, req);
 
-
+        return null;
     }
 
     private NekoMemberRechargeCardInfo buildMemberRechargeCardInfo(NekoMemberInfo memberInfo, AddMemberRechargeCardRequest req) {
