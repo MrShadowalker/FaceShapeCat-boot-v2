@@ -106,17 +106,18 @@ public class NekoCustomerInfo implements Serializable {
     @ApiModelProperty(value = "子来源")
     private String subSource;
 	/**跟踪员工ID*/
-	@Excel(name = "跟踪员工ID", width = 15, dictTable = "sys_user", dicText = "realname", dicCode = "username")
-	@Dict(dictTable = "sys_user", dicText = "realname", dicCode = "username")
+	@Excel(name = "跟踪员工ID", width = 15, dictTable = "sys_user", dicText = "realname", dicCode = "id")
+	@Dict(dictTable = "sys_user", dicText = "realname", dicCode = "id")
     @ApiModelProperty(value = "跟踪员工ID")
     private String employeeId;
 	/**咨询顾问员工ID*/
-	@Excel(name = "咨询顾问员工ID", width = 15, dictTable = "sys_user", dicText = "realname", dicCode = "username")
-	@Dict(dictTable = "sys_user", dicText = "realname", dicCode = "username")
+	@Excel(name = "咨询顾问员工ID", width = 15, dictTable = "sys_user", dicText = "realname", dicCode = "id")
+	@Dict(dictTable = "sys_user", dicText = "realname", dicCode = "id")
     @ApiModelProperty(value = "咨询顾问员工ID")
     private String consultantId;
 	/**推荐人ID*/
-	@Excel(name = "推荐人ID", width = 15)
+	@Excel(name = "推荐人ID", width = 15, dictTable = "neko_customer_info", dicText = "name", dicCode = "id")
+    @Dict(dictTable = "neko_customer_info", dicText = "name", dicCode = "id")
     @ApiModelProperty(value = "推荐人ID")
     private String recommenderId;
 	/**会员ID*/
