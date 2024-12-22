@@ -1,5 +1,6 @@
 package com.neko.modules.customer.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.neko.modules.customer.entity.NekoMemberInfo;
 import com.neko.modules.customer.mapper.NekoMemberInfoMapper;
 import com.neko.modules.customer.service.INekoMemberInfoService;
@@ -16,4 +17,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 @Service
 public class NekoMemberInfoServiceImpl extends ServiceImpl<NekoMemberInfoMapper, NekoMemberInfo> implements INekoMemberInfoService {
 
+    @Override
+    public NekoMemberInfo getByCustomerId(String customerId) {
+        QueryWrapper<NekoMemberInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("customer_id", customerId);
+        return this.getOne(queryWrapper);
+    }
 }

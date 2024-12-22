@@ -79,7 +79,8 @@ public class NekoRechargeCardInfo implements Serializable {
     @ApiModelProperty(value = "卡片样式链接")
     private java.lang.String cardIconUrl;
 	/**状态*/
-	@Excel(name = "状态", width = 15)
+	@Excel(name = "状态", width = 15, dicCode = "neko_status")
+    @Dict(dicCode = "neko_status")
     @ApiModelProperty(value = "状态")
     private java.lang.String status;
 	/**类型*/

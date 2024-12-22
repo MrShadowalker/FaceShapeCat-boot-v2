@@ -3,18 +3,20 @@ package com.neko.modules.customer.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.neko.modules.customer.dto.request.AddMemberRechargeCardRequest;
 import com.neko.modules.customer.dto.response.CustomerDetailVO;
 import com.neko.modules.customer.dto.response.CustomerListPageVO;
 import com.neko.modules.customer.entity.NekoCustomerCourseInfo;
 import com.neko.modules.customer.entity.NekoCustomerInfo;
+import com.neko.modules.customer.entity.NekoMemberInfo;
 import com.neko.modules.customer.entity.NekoMemberRechargeCardInfo;
 import com.neko.modules.customer.service.INekoCustomerCourseInfoService;
 import com.neko.modules.customer.service.INekoCustomerInfoService;
+import com.neko.modules.customer.service.INekoMemberInfoService;
 import com.neko.modules.customer.service.INekoMemberRechargeCardInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.units.qual.A;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.system.query.QueryRuleEnum;
@@ -40,6 +42,9 @@ public class NekoCustomerManageController {
 
     @Autowired
     private INekoCustomerInfoService nekoCustomerInfoService;
+
+    @Autowired
+    private INekoMemberInfoService nekoMemberInfoService;
 
     @Autowired
     private INekoMemberRechargeCardInfoService nekoMemberRechargeCardInfoService;
@@ -106,6 +111,51 @@ public class NekoCustomerManageController {
         List<NekoCustomerCourseInfo> customerCourseInfoList = nekoCustomerCourseInfoService.listByMap(customerCourseInfoMap);
         customerDetail.setCustomerCourseInfoList(customerCourseInfoList);
         return Result.OK(customerDetail);
+    }
+
+    /**
+     * 新增会员充值卡信息
+     */
+    @ApiOperation(value="新增会员充值卡信息", notes="新增会员充值卡信息")
+    @GetMapping(value = "/addMemberRechargeCard")
+    public Result<CustomerDetailVO> addMemberRechargeCard(AddMemberRechargeCardRequest req) {
+        // 根据顾客ID获取顾客信息
+        NekoCustomerInfo nekoCustomerInfo = nekoCustomerInfoService.getById(req.getCustomerId());
+        // 构造会员信息
+        NekoMemberInfo memberInfo = buildMemberInfo(nekoCustomerInfo, req);
+        // 保存会员信息
+        nekoMemberInfoService.save(memberInfo);
+        // 获取会员信息
+        NekoMemberInfo nekoMemberInfo = nekoMemberInfoService.getByCustomerId(nekoCustomerInfo.getId());
+        // 构造会员充值卡信息
+        NekoMemberRechargeCardInfo memberRechargeCardInfo = buildMemberRechargeCardInfo(memberInfo, req);
+
+
+    }
+
+    private NekoMemberRechargeCardInfo buildMemberRechargeCardInfo(NekoMemberInfo memberInfo, AddMemberRechargeCardRequest req) {
+        req.setMemberId(memberInfo.getId());
+        return req;
+    }
+
+    private NekoMemberInfo buildMemberInfo(NekoCustomerInfo customer, AddMemberRechargeCardRequest rechargeCard) {
+        NekoMemberInfo member = new NekoMemberInfo();
+        member.setCreateBy(rechargeCard.getCreateBy());
+        member.setCreateTime(rechargeCard.getCreateTime());
+        member.setUpdateBy(rechargeCard.getUpdateBy());
+        member.setUpdateTime(rechargeCard.getUpdateTime());
+        member.setSysOrgCode(rechargeCard.getSysOrgCode());
+        member.setTenantId(rechargeCard.getTenantId());
+        member.setCustomerId(customer.getId());
+        member.setJoinDate(rechargeCard.getCreateTime());
+        if (rechargeCard.getRecommenderId().isBlank()) {
+            member.setSourceType("店员推荐");
+            member.setSourceId(rechargeCard.getEmployeeId());
+        } else {
+            member.setSourceType("会员推荐");
+            member.setSourceId(rechargeCard.getRecommenderId());
+        }
+        return member;
     }
 
 }
