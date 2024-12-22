@@ -1,4 +1,4 @@
-package com.neko.modules.member.controller;
+package com.neko.modules.merchant.controller;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,8 +14,8 @@ import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.system.query.QueryRuleEnum;
 import org.jeecg.common.util.oConvertUtils;
-import com.neko.modules.member.entity.NekoMemberInfo;
-import com.neko.modules.member.service.INekoMemberInfoService;
+import com.neko.modules.merchant.entity.NekoCourseInfo;
+import com.neko.modules.merchant.service.INekoCourseInfoService;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -40,68 +40,68 @@ import org.jeecg.common.aspect.annotation.AutoLog;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 
  /**
- * @Description: 会员信息
+ * @Description: 疗程信息
  * @Author: jeecg-boot
- * @Date:   2024-12-13
+ * @Date:   2024-12-22
  * @Version: V1.0
  */
-@Api(tags="会员信息")
+@Api(tags="疗程信息")
 @RestController
-@RequestMapping("/member/nekoMemberInfo")
+@RequestMapping("/merchant/nekoCourseInfo")
 @Slf4j
-public class NekoMemberInfoController extends JeecgController<NekoMemberInfo, INekoMemberInfoService> {
+public class NekoCourseInfoController extends JeecgController<NekoCourseInfo, INekoCourseInfoService> {
 	@Autowired
-	private INekoMemberInfoService nekoMemberInfoService;
+	private INekoCourseInfoService nekoCourseInfoService;
 	
 	/**
 	 * 分页列表查询
 	 *
-	 * @param nekoMemberInfo
+	 * @param nekoCourseInfo
 	 * @param pageNo
 	 * @param pageSize
 	 * @param req
 	 * @return
 	 */
-	//@AutoLog(value = "会员信息-分页列表查询")
-	@ApiOperation(value="会员信息-分页列表查询", notes="会员信息-分页列表查询")
+	//@AutoLog(value = "疗程信息-分页列表查询")
+	@ApiOperation(value="疗程信息-分页列表查询", notes="疗程信息-分页列表查询")
 	@GetMapping(value = "/list")
-	public Result<IPage<NekoMemberInfo>> queryPageList(NekoMemberInfo nekoMemberInfo,
+	public Result<IPage<NekoCourseInfo>> queryPageList(NekoCourseInfo nekoCourseInfo,
 								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
 								   HttpServletRequest req) {
-        QueryWrapper<NekoMemberInfo> queryWrapper = QueryGenerator.initQueryWrapper(nekoMemberInfo, req.getParameterMap());
-		Page<NekoMemberInfo> page = new Page<NekoMemberInfo>(pageNo, pageSize);
-		IPage<NekoMemberInfo> pageList = nekoMemberInfoService.page(page, queryWrapper);
+        QueryWrapper<NekoCourseInfo> queryWrapper = QueryGenerator.initQueryWrapper(nekoCourseInfo, req.getParameterMap());
+		Page<NekoCourseInfo> page = new Page<NekoCourseInfo>(pageNo, pageSize);
+		IPage<NekoCourseInfo> pageList = nekoCourseInfoService.page(page, queryWrapper);
 		return Result.OK(pageList);
 	}
 	
 	/**
 	 *   添加
 	 *
-	 * @param nekoMemberInfo
+	 * @param nekoCourseInfo
 	 * @return
 	 */
-	@AutoLog(value = "会员信息-添加")
-	@ApiOperation(value="会员信息-添加", notes="会员信息-添加")
-	@RequiresPermissions("member:neko_member_info:add")
+	@AutoLog(value = "疗程信息-添加")
+	@ApiOperation(value="疗程信息-添加", notes="疗程信息-添加")
+	@RequiresPermissions("merchant:neko_course_info:add")
 	@PostMapping(value = "/add")
-	public Result<String> add(@RequestBody NekoMemberInfo nekoMemberInfo) {
-		nekoMemberInfoService.save(nekoMemberInfo);
+	public Result<String> add(@RequestBody NekoCourseInfo nekoCourseInfo) {
+		nekoCourseInfoService.save(nekoCourseInfo);
 		return Result.OK("添加成功！");
 	}
 	
 	/**
 	 *  编辑
 	 *
-	 * @param nekoMemberInfo
+	 * @param nekoCourseInfo
 	 * @return
 	 */
-	@AutoLog(value = "会员信息-编辑")
-	@ApiOperation(value="会员信息-编辑", notes="会员信息-编辑")
-	@RequiresPermissions("member:neko_member_info:edit")
+	@AutoLog(value = "疗程信息-编辑")
+	@ApiOperation(value="疗程信息-编辑", notes="疗程信息-编辑")
+	@RequiresPermissions("merchant:neko_course_info:edit")
 	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
-	public Result<String> edit(@RequestBody NekoMemberInfo nekoMemberInfo) {
-		nekoMemberInfoService.updateById(nekoMemberInfo);
+	public Result<String> edit(@RequestBody NekoCourseInfo nekoCourseInfo) {
+		nekoCourseInfoService.updateById(nekoCourseInfo);
 		return Result.OK("编辑成功!");
 	}
 	
@@ -111,12 +111,12 @@ public class NekoMemberInfoController extends JeecgController<NekoMemberInfo, IN
 	 * @param id
 	 * @return
 	 */
-	@AutoLog(value = "会员信息-通过id删除")
-	@ApiOperation(value="会员信息-通过id删除", notes="会员信息-通过id删除")
-	@RequiresPermissions("member:neko_member_info:delete")
+	@AutoLog(value = "疗程信息-通过id删除")
+	@ApiOperation(value="疗程信息-通过id删除", notes="疗程信息-通过id删除")
+	@RequiresPermissions("merchant:neko_course_info:delete")
 	@DeleteMapping(value = "/delete")
 	public Result<String> delete(@RequestParam(name="id",required=true) String id) {
-		nekoMemberInfoService.removeById(id);
+		nekoCourseInfoService.removeById(id);
 		return Result.OK("删除成功!");
 	}
 	
@@ -126,12 +126,12 @@ public class NekoMemberInfoController extends JeecgController<NekoMemberInfo, IN
 	 * @param ids
 	 * @return
 	 */
-	@AutoLog(value = "会员信息-批量删除")
-	@ApiOperation(value="会员信息-批量删除", notes="会员信息-批量删除")
-	@RequiresPermissions("member:neko_member_info:deleteBatch")
+	@AutoLog(value = "疗程信息-批量删除")
+	@ApiOperation(value="疗程信息-批量删除", notes="疗程信息-批量删除")
+	@RequiresPermissions("merchant:neko_course_info:deleteBatch")
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<String> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
-		this.nekoMemberInfoService.removeByIds(Arrays.asList(ids.split(",")));
+		this.nekoCourseInfoService.removeByIds(Arrays.asList(ids.split(",")));
 		return Result.OK("批量删除成功!");
 	}
 	
@@ -141,27 +141,27 @@ public class NekoMemberInfoController extends JeecgController<NekoMemberInfo, IN
 	 * @param id
 	 * @return
 	 */
-	//@AutoLog(value = "会员信息-通过id查询")
-	@ApiOperation(value="会员信息-通过id查询", notes="会员信息-通过id查询")
+	//@AutoLog(value = "疗程信息-通过id查询")
+	@ApiOperation(value="疗程信息-通过id查询", notes="疗程信息-通过id查询")
 	@GetMapping(value = "/queryById")
-	public Result<NekoMemberInfo> queryById(@RequestParam(name="id",required=true) String id) {
-		NekoMemberInfo nekoMemberInfo = nekoMemberInfoService.getById(id);
-		if(nekoMemberInfo==null) {
+	public Result<NekoCourseInfo> queryById(@RequestParam(name="id",required=true) String id) {
+		NekoCourseInfo nekoCourseInfo = nekoCourseInfoService.getById(id);
+		if(nekoCourseInfo==null) {
 			return Result.error("未找到对应数据");
 		}
-		return Result.OK(nekoMemberInfo);
+		return Result.OK(nekoCourseInfo);
 	}
 
     /**
     * 导出excel
     *
     * @param request
-    * @param nekoMemberInfo
+    * @param nekoCourseInfo
     */
-    @RequiresPermissions("member:neko_member_info:exportXls")
+    @RequiresPermissions("merchant:neko_course_info:exportXls")
     @RequestMapping(value = "/exportXls")
-    public ModelAndView exportXls(HttpServletRequest request, NekoMemberInfo nekoMemberInfo) {
-        return super.exportXls(request, nekoMemberInfo, NekoMemberInfo.class, "会员信息");
+    public ModelAndView exportXls(HttpServletRequest request, NekoCourseInfo nekoCourseInfo) {
+        return super.exportXls(request, nekoCourseInfo, NekoCourseInfo.class, "疗程信息");
     }
 
     /**
@@ -171,10 +171,10 @@ public class NekoMemberInfoController extends JeecgController<NekoMemberInfo, IN
     * @param response
     * @return
     */
-    @RequiresPermissions("member:neko_member_info:importExcel")
+    @RequiresPermissions("merchant:neko_course_info:importExcel")
     @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
     public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
-        return super.importExcel(request, response, NekoMemberInfo.class);
+        return super.importExcel(request, response, NekoCourseInfo.class);
     }
 
 }

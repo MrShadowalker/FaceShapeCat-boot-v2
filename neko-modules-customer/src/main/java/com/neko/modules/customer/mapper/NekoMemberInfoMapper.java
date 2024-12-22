@@ -1,9 +1,6 @@
-package com.neko.modules.member.mapper;
+package com.neko.modules.customer.mapper;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-import com.neko.modules.member.entity.NekoMemberInfo;
+import com.neko.modules.customer.entity.NekoMemberInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

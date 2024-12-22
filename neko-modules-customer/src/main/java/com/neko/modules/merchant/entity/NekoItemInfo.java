@@ -1,4 +1,4 @@
-package com.neko.modules.member.entity;
+package com.neko.modules.merchant.entity;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -21,17 +21,17 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * @Description: 会员信息
+ * @Description: 服务项目信息
  * @Author: jeecg-boot
- * @Date:   2024-12-13
+ * @Date:   2024-12-22
  * @Version: V1.0
  */
 @Data
-@TableName("neko_member_info")
+@TableName("neko_item_info")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="neko_member_info对象", description="会员信息")
-public class NekoMemberInfo implements Serializable {
+@ApiModel(value="neko_item_info对象", description="服务项目信息")
+public class NekoItemInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
 	/**主键*/
@@ -66,42 +66,48 @@ public class NekoMemberInfo implements Serializable {
 	@Excel(name = "租户ID", width = 15)
     @ApiModelProperty(value = "租户ID")
     private java.lang.Integer tenantId;
-	/**顾客ID*/
-	@Excel(name = "顾客ID", width = 15)
-    @ApiModelProperty(value = "顾客ID")
-    private java.lang.String customerId;
-	/**会员类型*/
-    @Excel(name = "会员类型", width = 15, dictTable = "sys_category", dicText = "name", dicCode = "id")
-    @ApiModelProperty(value = "会员类型")
+	/**项目名称*/
+	@Excel(name = "项目名称", width = 15)
+    @ApiModelProperty(value = "项目名称")
+    private java.lang.String name;
+	/**项目描述*/
+	@Excel(name = "项目描述", width = 15)
+    @ApiModelProperty(value = "项目描述")
+    private java.lang.String description;
+	/**状态*/
+	@Excel(name = "状态", width = 15)
+    @ApiModelProperty(value = "状态")
+    private java.lang.String status;
+	/**类型*/
+	@Excel(name = "类型", width = 15)
+    @ApiModelProperty(value = "类型")
     private java.lang.String type;
-	/**会员子类型*/
-    @Excel(name = "会员子类型", width = 15, dictTable = "sys_category", dicText = "name", dicCode = "id")
-    @ApiModelProperty(value = "会员子类型")
+	/**子类型*/
+	@Excel(name = "子类型", width = 15)
+    @ApiModelProperty(value = "子类型")
     private java.lang.String subType;
-	/**会员等级*/
-	@Excel(name = "会员等级", width = 15)
-    @ApiModelProperty(value = "会员等级")
-    private java.lang.Integer level;
-	/**加入日期*/
-	@Excel(name = "加入日期", width = 15, format = "yyyy-MM-dd")
+	/**来源*/
+	@Excel(name = "来源", width = 15)
+    @ApiModelProperty(value = "来源")
+    private java.lang.String source;
+	/**子来源*/
+	@Excel(name = "子来源", width = 15)
+    @ApiModelProperty(value = "子来源")
+    private java.lang.String subSource;
+	/**项目单价，单位：分*/
+	@Excel(name = "项目单价，单位：分", width = 15)
+    @ApiModelProperty(value = "项目单价，单位：分")
+    private java.math.BigDecimal itemPrice;
+	/**开始日期*/
+	@Excel(name = "开始日期", width = 15, format = "yyyy-MM-dd")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    @ApiModelProperty(value = "加入日期")
-    private java.util.Date joinDate;
-	/**来源类型*/
-	@Excel(name = "来源类型", width = 15)
-    @ApiModelProperty(value = "来源类型")
-    private java.lang.String sourceType;
-	/**来源ID*/
-	@Excel(name = "来源ID", width = 15)
-    @ApiModelProperty(value = "来源ID")
-    private java.lang.String sourceId;
-	/**来源名称*/
-	@Excel(name = "来源名称", width = 15)
-    @ApiModelProperty(value = "来源名称")
-    private java.lang.String sourceName;
-	/**备注*/
-	@Excel(name = "备注", width = 15)
-    @ApiModelProperty(value = "备注")
-    private java.lang.String remark;
+    @ApiModelProperty(value = "开始日期")
+    private java.util.Date startDate;
+	/**结束日期*/
+	@Excel(name = "结束日期", width = 15, format = "yyyy-MM-dd")
+	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @ApiModelProperty(value = "结束日期")
+    private java.util.Date endDate;
 }

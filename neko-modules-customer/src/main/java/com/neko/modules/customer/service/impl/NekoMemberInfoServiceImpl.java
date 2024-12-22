@@ -1,8 +1,8 @@
-package com.neko.modules.member.service.impl;
+package com.neko.modules.customer.service.impl;
 
-import com.neko.modules.member.entity.NekoMemberInfo;
-import com.neko.modules.member.mapper.NekoMemberInfoMapper;
-import com.neko.modules.member.service.INekoMemberInfoService;
+import com.neko.modules.customer.entity.NekoMemberInfo;
+import com.neko.modules.customer.mapper.NekoMemberInfoMapper;
+import com.neko.modules.customer.service.INekoMemberInfoService;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

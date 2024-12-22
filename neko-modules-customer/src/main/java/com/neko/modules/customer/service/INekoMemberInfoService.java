@@ -1,6 +1,6 @@
-package com.neko.modules.member.service;
+package com.neko.modules.customer.service;
 
-import com.neko.modules.member.entity.NekoMemberInfo;
+import com.neko.modules.customer.entity.NekoMemberInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

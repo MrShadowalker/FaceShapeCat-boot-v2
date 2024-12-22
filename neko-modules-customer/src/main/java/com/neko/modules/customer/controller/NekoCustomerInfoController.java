@@ -10,6 +10,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.system.query.QueryRuleEnum;
@@ -192,16 +194,6 @@ public class NekoCustomerInfoController extends JeecgController<NekoCustomerInfo
 	 public Result<String> queryCustomerIdByName(@RequestParam(name="name",required=true) String name) {
 		 String customerId = nekoCustomerInfoService.queryCustomerIdByName(name);
 		 return Result.OK(customerId);
-	 }
-
-	 /**
-	  * 查顾客当前有几张会员卡
-	  */
-	 @ApiOperation(value="顾客相关信息-通过id查询会员数量", notes="顾客相关信息-通过id查询会员数量")
-	 @GetMapping(value = "/queryMemberCardCount")
-	 public Result<Integer> queryCustomerCardCount(@RequestParam(name="customerId",required=true) String customerId) {
-		 Integer count = nekoCustomerInfoService.queryMemberCardCount(customerId);
-		 return Result.OK(count);
 	 }
 
  }

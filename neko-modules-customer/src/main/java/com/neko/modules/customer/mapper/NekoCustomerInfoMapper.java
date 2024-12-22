@@ -16,5 +16,4 @@ public interface NekoCustomerInfoMapper extends BaseMapper<NekoCustomerInfo> {
 
     // queryCustomerIdByName
     public String queryCustomerIdByName(@Param("name") String name);
-
 }

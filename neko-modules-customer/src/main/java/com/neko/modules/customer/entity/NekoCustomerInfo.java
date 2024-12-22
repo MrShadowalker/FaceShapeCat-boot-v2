@@ -83,9 +83,10 @@ public class NekoCustomerInfo implements Serializable {
     @ApiModelProperty(value = "微信号")
     private String wechatNum;
 	/**性别*/
-	@Excel(name = "性别", width = 15)
+	@Excel(name = "性别", width = 15, dicCode = "neko_gender")
+    @Dict(dicCode = "neko_gender")
     @ApiModelProperty(value = "性别")
-    private Integer gender;
+    private String gender;
 	/**生日*/
 	@Excel(name = "生日", width = 15, format = "yyyy-MM-dd")
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
