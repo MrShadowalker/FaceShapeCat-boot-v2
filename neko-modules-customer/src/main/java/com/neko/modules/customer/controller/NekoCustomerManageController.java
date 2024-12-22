@@ -6,14 +6,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.neko.modules.customer.dto.request.AddMemberRechargeCardRequest;
 import com.neko.modules.customer.dto.response.CustomerDetailVO;
 import com.neko.modules.customer.dto.response.CustomerListPageVO;
-import com.neko.modules.customer.entity.NekoCustomerCourseInfo;
-import com.neko.modules.customer.entity.NekoCustomerInfo;
-import com.neko.modules.customer.entity.NekoMemberInfo;
-import com.neko.modules.customer.entity.NekoMemberRechargeCardInfo;
-import com.neko.modules.customer.service.INekoCustomerCourseInfoService;
-import com.neko.modules.customer.service.INekoCustomerInfoService;
-import com.neko.modules.customer.service.INekoMemberInfoService;
-import com.neko.modules.customer.service.INekoMemberRechargeCardInfoService;
+import com.neko.modules.customer.entity.*;
+import com.neko.modules.customer.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -22,12 +16,14 @@ import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.system.query.QueryRuleEnum;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +42,9 @@ public class NekoCustomerManageController {
 
     @Autowired
     private INekoMemberInfoService nekoMemberInfoService;
+
+    @Autowired
+    private INekoCardInfoService nekoCardInfoService;
 
     @Autowired
     private INekoMemberRechargeCardInfoService nekoMemberRechargeCardInfoService;
@@ -120,23 +119,58 @@ public class NekoCustomerManageController {
      */
     @ApiOperation(value="新增会员充值卡信息", notes="新增会员充值卡信息")
     @GetMapping(value = "/addMemberRechargeCard")
-    public Result<CustomerDetailVO> addMemberRechargeCard(AddMemberRechargeCardRequest req) {
-        // 根据顾客ID获取顾客信息
-        NekoCustomerInfo nekoCustomerInfo = nekoCustomerInfoService.getById(req.getCustomerId());
-        // 构造会员信息
-        NekoMemberInfo memberInfo = buildMemberInfo(nekoCustomerInfo, req);
-        // 保存会员信息
-        nekoMemberInfoService.save(memberInfo);
-        // 获取会员信息
-        NekoMemberInfo nekoMemberInfo = nekoMemberInfoService.getByCustomerId(nekoCustomerInfo.getId());
-        // 构造会员充值卡信息
-        NekoMemberRechargeCardInfo memberRechargeCardInfo = buildMemberRechargeCardInfo(memberInfo, req);
+    @Transactional(rollbackFor = Exception.class)
+    public Result<Boolean> addMemberRechargeCard(@Valid AddMemberRechargeCardRequest req) {
 
-        return null;
+        try {
+            // 根据顾客ID获取顾客信息
+            NekoCustomerInfo nekoCustomerInfo = nekoCustomerInfoService.getById(req.getCustomerId());
+            // 构造会员信息
+            NekoMemberInfo memberInfo = buildMemberInfo(nekoCustomerInfo, req);
+            // 保存会员信息
+            nekoMemberInfoService.save(memberInfo);
+            // 获取会员信息
+            NekoMemberInfo nekoMemberInfo = nekoMemberInfoService.getByCustomerId(nekoCustomerInfo.getId());
+            // 构造会员充值卡信息
+            NekoMemberRechargeCardInfo memberRechargeCardInfo = buildMemberRechargeCardInfo(nekoMemberInfo, req);
+            nekoMemberRechargeCardInfoService.save(memberRechargeCardInfo);
+            // 构造父卡信息
+            NekoCardInfo cardInfo = buildCardInfo(memberRechargeCardInfo);
+            nekoCardInfoService.save(cardInfo);
+        } catch (Exception e) {
+            log.error("新增会员充值卡信息失败", e);
+            return Result.error("新增会员充值卡信息失败");
+        }
+
+        return Result.OK(true);
+    }
+
+    private NekoCardInfo buildCardInfo(NekoMemberRechargeCardInfo rechargeCard) {
+        NekoCardInfo cardInfo = new NekoCardInfo();
+        cardInfo.setCreateBy(rechargeCard.getCreateBy());
+        cardInfo.setCreateTime(rechargeCard.getCreateTime());
+        cardInfo.setUpdateBy(rechargeCard.getUpdateBy());
+        cardInfo.setUpdateTime(rechargeCard.getUpdateTime());
+        cardInfo.setTenantId(rechargeCard.getTenantId());
+        cardInfo.setSysOrgCode(rechargeCard.getSysOrgCode());
+        cardInfo.setCustomerId(rechargeCard.getCustomerId());
+        cardInfo.setMemberId(rechargeCard.getMemberId());
+        cardInfo.setSubCardId(rechargeCard.getId());
+        cardInfo.setStatus(rechargeCard.getStatus());
+        cardInfo.setType("RECHARGE_CARD");
+        cardInfo.setSubType(rechargeCard.getSubType());
+        cardInfo.setSource(rechargeCard.getSource());
+        cardInfo.setSubSource(rechargeCard.getSubSource());
+        cardInfo.setStartDate(rechargeCard.getCreateTime());
+        cardInfo.setEmployeeId(rechargeCard.getEmployeeId());
+        cardInfo.setShopId(rechargeCard.getShopId());
+        cardInfo.setRecommenderId(rechargeCard.getRecommenderId());
+        return cardInfo;
     }
 
     private NekoMemberRechargeCardInfo buildMemberRechargeCardInfo(NekoMemberInfo memberInfo, AddMemberRechargeCardRequest req) {
         req.setMemberId(memberInfo.getId());
+        req.setStatus("ACTIVE");
         return req;
     }
 
