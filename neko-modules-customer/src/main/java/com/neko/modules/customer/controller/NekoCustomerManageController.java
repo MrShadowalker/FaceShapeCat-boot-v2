@@ -104,11 +104,11 @@ public class NekoCustomerManageController {
         customerDetail.setMemberRechargeCardCount(nekoMemberRechargeCardInfoService.countMemberCardByCustomerId(customerId));
         customerDetail.setCustomerCourseCount(nekoCustomerCourseInfoService.countCustomerCourseByCustomerId(customerId));
         Map<String, Object> memberRechargeCardInfoMap = new HashMap<>();
-        memberRechargeCardInfoMap.put("customerId", customerId);
+        memberRechargeCardInfoMap.put("customer_id", customerId);
         List<NekoMemberRechargeCardInfo> memberRechargeCardInfoList = nekoMemberRechargeCardInfoService.listByMap(memberRechargeCardInfoMap);
         customerDetail.setMemberRechargeCardInfoList(memberRechargeCardInfoList);
         Map<String, Object> customerCourseInfoMap = new HashMap<>();
-        customerCourseInfoMap.put("customerId", customerId);
+        customerCourseInfoMap.put("customer_id", customerId);
         List<NekoCustomerCourseInfo> customerCourseInfoList = nekoCustomerCourseInfoService.listByMap(customerCourseInfoMap);
         customerDetail.setCustomerCourseInfoList(customerCourseInfoList);
         return Result.OK(customerDetail);

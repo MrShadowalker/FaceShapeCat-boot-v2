@@ -22,7 +22,7 @@ public class NekoMemberRechargeCardInfoServiceImpl extends ServiceImpl<NekoMembe
     @Override
     public Integer countMemberCardByCustomerId(String customerId) {
         QueryWrapper<NekoMemberRechargeCardInfo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("customer_id",customerId);
+        queryWrapper.eq("customer_id", customerId);
         return Math.toIntExact(this.count(queryWrapper));
     }
 
