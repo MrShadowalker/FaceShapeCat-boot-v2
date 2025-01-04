@@ -83,7 +83,7 @@ public class NekoCourseInfoController extends JeecgController<NekoCourseInfo, IN
 	 */
 	@AutoLog(value = "疗程信息-添加")
 	@ApiOperation(value="疗程信息-添加", notes="疗程信息-添加")
-	@RequiresPermissions("merchant:neko_course_info:add")
+	//@RequiresPermissions("merchant:neko_course_info:add")
 	@PostMapping(value = "/add")
 	public Result<String> add(@RequestBody NekoCourseInfo nekoCourseInfo) {
 		nekoCourseInfoService.save(nekoCourseInfo);
@@ -98,7 +98,7 @@ public class NekoCourseInfoController extends JeecgController<NekoCourseInfo, IN
 	 */
 	@AutoLog(value = "疗程信息-编辑")
 	@ApiOperation(value="疗程信息-编辑", notes="疗程信息-编辑")
-	@RequiresPermissions("merchant:neko_course_info:edit")
+	//@RequiresPermissions("merchant:neko_course_info:edit")
 	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
 	public Result<String> edit(@RequestBody NekoCourseInfo nekoCourseInfo) {
 		nekoCourseInfoService.updateById(nekoCourseInfo);
@@ -113,7 +113,7 @@ public class NekoCourseInfoController extends JeecgController<NekoCourseInfo, IN
 	 */
 	@AutoLog(value = "疗程信息-通过id删除")
 	@ApiOperation(value="疗程信息-通过id删除", notes="疗程信息-通过id删除")
-	@RequiresPermissions("merchant:neko_course_info:delete")
+	//@RequiresPermissions("merchant:neko_course_info:delete")
 	@DeleteMapping(value = "/delete")
 	public Result<String> delete(@RequestParam(name="id",required=true) String id) {
 		nekoCourseInfoService.removeById(id);
@@ -128,7 +128,7 @@ public class NekoCourseInfoController extends JeecgController<NekoCourseInfo, IN
 	 */
 	@AutoLog(value = "疗程信息-批量删除")
 	@ApiOperation(value="疗程信息-批量删除", notes="疗程信息-批量删除")
-	@RequiresPermissions("merchant:neko_course_info:deleteBatch")
+	//@RequiresPermissions("merchant:neko_course_info:deleteBatch")
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<String> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		this.nekoCourseInfoService.removeByIds(Arrays.asList(ids.split(",")));
@@ -158,8 +158,8 @@ public class NekoCourseInfoController extends JeecgController<NekoCourseInfo, IN
     * @param request
     * @param nekoCourseInfo
     */
-    @RequiresPermissions("merchant:neko_course_info:exportXls")
-    @RequestMapping(value = "/exportXls")
+    //@RequiresPermissions("merchant:neko_course_info:exportXls")
+    //@RequestMapping(value = "/exportXls")
     public ModelAndView exportXls(HttpServletRequest request, NekoCourseInfo nekoCourseInfo) {
         return super.exportXls(request, nekoCourseInfo, NekoCourseInfo.class, "疗程信息");
     }
@@ -171,7 +171,7 @@ public class NekoCourseInfoController extends JeecgController<NekoCourseInfo, IN
     * @param response
     * @return
     */
-    @RequiresPermissions("merchant:neko_course_info:importExcel")
+    //@RequiresPermissions("merchant:neko_course_info:importExcel")
     @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
     public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
         return super.importExcel(request, response, NekoCourseInfo.class);

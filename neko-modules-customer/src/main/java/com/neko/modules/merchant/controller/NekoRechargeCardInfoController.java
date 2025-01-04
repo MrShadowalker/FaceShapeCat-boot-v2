@@ -83,7 +83,7 @@ public class NekoRechargeCardInfoController extends JeecgController<NekoRecharge
 	 */
 	@AutoLog(value = "充值卡元信息-添加")
 	@ApiOperation(value="充值卡元信息-添加", notes="充值卡元信息-添加")
-	@RequiresPermissions("merchant:neko_recharge_card_info:add")
+	//@RequiresPermissions("merchant:neko_recharge_card_info:add")
 	@PostMapping(value = "/add")
 	public Result<String> add(@RequestBody NekoRechargeCardInfo nekoRechargeCardInfo) {
 		nekoRechargeCardInfoService.save(nekoRechargeCardInfo);
@@ -98,7 +98,7 @@ public class NekoRechargeCardInfoController extends JeecgController<NekoRecharge
 	 */
 	@AutoLog(value = "充值卡元信息-编辑")
 	@ApiOperation(value="充值卡元信息-编辑", notes="充值卡元信息-编辑")
-	@RequiresPermissions("merchant:neko_recharge_card_info:edit")
+	//@RequiresPermissions("merchant:neko_recharge_card_info:edit")
 	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
 	public Result<String> edit(@RequestBody NekoRechargeCardInfo nekoRechargeCardInfo) {
 		nekoRechargeCardInfoService.updateById(nekoRechargeCardInfo);
@@ -158,7 +158,7 @@ public class NekoRechargeCardInfoController extends JeecgController<NekoRecharge
     * @param request
     * @param nekoRechargeCardInfo
     */
-    @RequiresPermissions("merchant:neko_recharge_card_info:exportXls")
+    //@RequiresPermissions("merchant:neko_recharge_card_info:exportXls")
     @RequestMapping(value = "/exportXls")
     public ModelAndView exportXls(HttpServletRequest request, NekoRechargeCardInfo nekoRechargeCardInfo) {
         return super.exportXls(request, nekoRechargeCardInfo, NekoRechargeCardInfo.class, "充值卡元信息");
@@ -171,7 +171,7 @@ public class NekoRechargeCardInfoController extends JeecgController<NekoRecharge
     * @param response
     * @return
     */
-    @RequiresPermissions("merchant:neko_recharge_card_info:importExcel")
+    //@RequiresPermissions("merchant:neko_recharge_card_info:importExcel")
     @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
     public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
         return super.importExcel(request, response, NekoRechargeCardInfo.class);

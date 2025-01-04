@@ -83,7 +83,7 @@ public class NekoItemInfoController extends JeecgController<NekoItemInfo, INekoI
 	 */
 	@AutoLog(value = "服务项目信息-添加")
 	@ApiOperation(value="服务项目信息-添加", notes="服务项目信息-添加")
-	@RequiresPermissions("merchant:neko_item_info:add")
+	//@RequiresPermissions("merchant:neko_item_info:add")
 	@PostMapping(value = "/add")
 	public Result<String> add(@RequestBody NekoItemInfo nekoItemInfo) {
 		nekoItemInfoService.save(nekoItemInfo);
@@ -98,7 +98,7 @@ public class NekoItemInfoController extends JeecgController<NekoItemInfo, INekoI
 	 */
 	@AutoLog(value = "服务项目信息-编辑")
 	@ApiOperation(value="服务项目信息-编辑", notes="服务项目信息-编辑")
-	@RequiresPermissions("merchant:neko_item_info:edit")
+	//@RequiresPermissions("merchant:neko_item_info:edit")
 	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
 	public Result<String> edit(@RequestBody NekoItemInfo nekoItemInfo) {
 		nekoItemInfoService.updateById(nekoItemInfo);
@@ -113,7 +113,7 @@ public class NekoItemInfoController extends JeecgController<NekoItemInfo, INekoI
 	 */
 	@AutoLog(value = "服务项目信息-通过id删除")
 	@ApiOperation(value="服务项目信息-通过id删除", notes="服务项目信息-通过id删除")
-	@RequiresPermissions("merchant:neko_item_info:delete")
+	//@RequiresPermissions("merchant:neko_item_info:delete")
 	@DeleteMapping(value = "/delete")
 	public Result<String> delete(@RequestParam(name="id",required=true) String id) {
 		nekoItemInfoService.removeById(id);
@@ -128,7 +128,7 @@ public class NekoItemInfoController extends JeecgController<NekoItemInfo, INekoI
 	 */
 	@AutoLog(value = "服务项目信息-批量删除")
 	@ApiOperation(value="服务项目信息-批量删除", notes="服务项目信息-批量删除")
-	@RequiresPermissions("merchant:neko_item_info:deleteBatch")
+	//@RequiresPermissions("merchant:neko_item_info:deleteBatch")
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<String> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		this.nekoItemInfoService.removeByIds(Arrays.asList(ids.split(",")));
@@ -158,7 +158,7 @@ public class NekoItemInfoController extends JeecgController<NekoItemInfo, INekoI
     * @param request
     * @param nekoItemInfo
     */
-    @RequiresPermissions("merchant:neko_item_info:exportXls")
+    //@RequiresPermissions("merchant:neko_item_info:exportXls")
     @RequestMapping(value = "/exportXls")
     public ModelAndView exportXls(HttpServletRequest request, NekoItemInfo nekoItemInfo) {
         return super.exportXls(request, nekoItemInfo, NekoItemInfo.class, "服务项目信息");
@@ -171,7 +171,7 @@ public class NekoItemInfoController extends JeecgController<NekoItemInfo, INekoI
     * @param response
     * @return
     */
-    @RequiresPermissions("merchant:neko_item_info:importExcel")
+    //@RequiresPermissions("merchant:neko_item_info:importExcel")
     @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
     public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
         return super.importExcel(request, response, NekoItemInfo.class);

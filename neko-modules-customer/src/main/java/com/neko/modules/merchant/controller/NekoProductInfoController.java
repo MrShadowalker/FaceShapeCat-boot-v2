@@ -83,7 +83,7 @@ public class NekoProductInfoController extends JeecgController<NekoProductInfo, 
 	 */
 	@AutoLog(value = "商品信息-添加")
 	@ApiOperation(value="商品信息-添加", notes="商品信息-添加")
-	@RequiresPermissions("merchant:neko_product_info:add")
+	//@RequiresPermissions("merchant:neko_product_info:add")
 	@PostMapping(value = "/add")
 	public Result<String> add(@RequestBody NekoProductInfo nekoProductInfo) {
 		nekoProductInfoService.save(nekoProductInfo);
@@ -98,7 +98,7 @@ public class NekoProductInfoController extends JeecgController<NekoProductInfo, 
 	 */
 	@AutoLog(value = "商品信息-编辑")
 	@ApiOperation(value="商品信息-编辑", notes="商品信息-编辑")
-	@RequiresPermissions("merchant:neko_product_info:edit")
+	//@RequiresPermissions("merchant:neko_product_info:edit")
 	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
 	public Result<String> edit(@RequestBody NekoProductInfo nekoProductInfo) {
 		nekoProductInfoService.updateById(nekoProductInfo);
@@ -113,7 +113,7 @@ public class NekoProductInfoController extends JeecgController<NekoProductInfo, 
 	 */
 	@AutoLog(value = "商品信息-通过id删除")
 	@ApiOperation(value="商品信息-通过id删除", notes="商品信息-通过id删除")
-	@RequiresPermissions("merchant:neko_product_info:delete")
+	//@RequiresPermissions("merchant:neko_product_info:delete")
 	@DeleteMapping(value = "/delete")
 	public Result<String> delete(@RequestParam(name="id",required=true) String id) {
 		nekoProductInfoService.removeById(id);
@@ -128,7 +128,7 @@ public class NekoProductInfoController extends JeecgController<NekoProductInfo, 
 	 */
 	@AutoLog(value = "商品信息-批量删除")
 	@ApiOperation(value="商品信息-批量删除", notes="商品信息-批量删除")
-	@RequiresPermissions("merchant:neko_product_info:deleteBatch")
+	//@RequiresPermissions("merchant:neko_product_info:deleteBatch")
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<String> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		this.nekoProductInfoService.removeByIds(Arrays.asList(ids.split(",")));
@@ -158,7 +158,7 @@ public class NekoProductInfoController extends JeecgController<NekoProductInfo, 
     * @param request
     * @param nekoProductInfo
     */
-    @RequiresPermissions("merchant:neko_product_info:exportXls")
+    //@RequiresPermissions("merchant:neko_product_info:exportXls")
     @RequestMapping(value = "/exportXls")
     public ModelAndView exportXls(HttpServletRequest request, NekoProductInfo nekoProductInfo) {
         return super.exportXls(request, nekoProductInfo, NekoProductInfo.class, "商品信息");
@@ -171,7 +171,7 @@ public class NekoProductInfoController extends JeecgController<NekoProductInfo, 
     * @param response
     * @return
     */
-    @RequiresPermissions("merchant:neko_product_info:importExcel")
+    //@RequiresPermissions("merchant:neko_product_info:importExcel")
     @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
     public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
         return super.importExcel(request, response, NekoProductInfo.class);
