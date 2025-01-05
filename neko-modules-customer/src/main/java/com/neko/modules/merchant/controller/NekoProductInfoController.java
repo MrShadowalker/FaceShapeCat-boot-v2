@@ -83,7 +83,7 @@ public class NekoProductInfoController extends JeecgController<NekoProductInfo, 
 	 */
 	@AutoLog(value = "商品信息-添加")
 	@ApiOperation(value="商品信息-添加", notes="商品信息-添加")
-	//@RequiresPermissions("merchant:neko_product_info:add")
+	@RequiresPermissions("merchant:neko_product_info:add")
 	@PostMapping(value = "/add")
 	public Result<String> add(@RequestBody NekoProductInfo nekoProductInfo) {
 		nekoProductInfoService.save(nekoProductInfo);
@@ -98,7 +98,7 @@ public class NekoProductInfoController extends JeecgController<NekoProductInfo, 
 	 */
 	@AutoLog(value = "商品信息-编辑")
 	@ApiOperation(value="商品信息-编辑", notes="商品信息-编辑")
-	//@RequiresPermissions("merchant:neko_product_info:edit")
+	@RequiresPermissions("merchant:neko_product_info:edit")
 	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
 	public Result<String> edit(@RequestBody NekoProductInfo nekoProductInfo) {
 		nekoProductInfoService.updateById(nekoProductInfo);

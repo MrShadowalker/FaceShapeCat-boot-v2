@@ -92,7 +92,7 @@ public class NekoCustomerInfoController extends JeecgController<NekoCustomerInfo
 	 */
 	@AutoLog(value = "顾客相关信息-添加")
 	@ApiOperation(value="顾客相关信息-添加", notes="顾客相关信息-添加")
-	//@RequiresPermissions("customer:neko_customer_info:add")
+	@RequiresPermissions("customer:neko_customer_info:add")
 	@PostMapping(value = "/add")
 	public Result<String> add(@RequestBody NekoCustomerInfo nekoCustomerInfo) {
 		nekoCustomerInfoService.save(nekoCustomerInfo);
